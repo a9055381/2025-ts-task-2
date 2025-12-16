@@ -6,16 +6,16 @@ import type { CouponData, Pagination } from '@/types/coupon'
 import { formatDate } from '@/utils/date'
 import { onMounted, ref, useTemplateRef } from 'vue'
 
-const initialFormData: CouponData = {
+const getInitialCouponData = (): CouponData => ({
   id: '',
   title: '',
   is_enabled: 0,
   percent: 0,
   due_date: Date.now() / 1000,
   code: '',
-}
+})
 
-const form = ref<CouponData>(initialFormData)
+const tempCoupon = ref<CouponData>(getInitialCouponData())
 
 const currentPage = ref<string>('1')
 
@@ -52,9 +52,9 @@ const isLoading = ref<boolean>(false)
 
 const openModal = (coupon?: CouponData) => {
   if (coupon) {
-    form.value = { ...coupon }
+    tempCoupon.value = { ...coupon }
   } else {
-    form.value = initialFormData
+    tempCoupon.value = getInitialCouponData()
   }
 
   couponModalRef.value?.openModal(async (couponData: CouponData) => {
@@ -203,7 +203,7 @@ const deleteCoupon = async (couponId: string) => {
     </div>
   </div>
 
-  <CouponModal ref="couponModalRef" :coupon="form" :is-loading="isLoading" />
+  <CouponModal ref="couponModalRef" :coupon="tempCoupon" :is-loading="isLoading" />
   <DeleteModal ref="deleteModalRef" title="刪除訂單" content="確定要刪除該優惠券嗎？" />
 </template>
 
