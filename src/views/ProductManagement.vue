@@ -28,7 +28,7 @@ import { onMounted, ref, useTemplateRef } from 'vue'
 // TODO: 為模板引用加上型別註解
 // 提示：使用 useTemplateRef<InstanceType<typeof ProductModal>>()
 const productModalRef = useTemplateRef<InstanceType<typeof ProductModal>>('productModalRef')
-const deleteModalRef = useTemplateRef<InstanceType<typeof ProductModal>>('deleteModalRef')
+const deleteModalRef = useTemplateRef<InstanceType<typeof DeleteModal>>('deleteModalRef')
 
 // TODO: 為 currentPage 加上型別註解
 // 提示：使用 ref<string>()
@@ -90,6 +90,9 @@ const tempProduct = ref<ProductData>(getInitialProductData())
 const openModal = (product: ProductData | null = null) => {
   if (product) {
     tempProduct.value = { ...product, imagesUrl: product.imagesUrl ? [...product.imagesUrl] : [''] }
+  } else {
+    // 新增：使用初始商品資料
+    tempProduct.value = getInitialProductData()
   }
 
   productModalRef.value?.openModal()
