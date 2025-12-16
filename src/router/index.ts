@@ -15,6 +15,11 @@ const router = createRouter({
           component: () => import('@/views/ProductManagement.vue'),
         },
         {
+          path: '/coupon-management',
+          name: 'coupon-management',
+          component: () => import('@/views/CouponManagement.vue'),
+        },
+        {
           path: '/order-management',
           name: 'order-management',
           component: () => import('@/views/OrderManagement.vue'),
