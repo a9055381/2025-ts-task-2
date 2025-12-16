@@ -70,7 +70,7 @@ export type CreateProductParams = {
   content: string
   is_enabled: number
   imageUrl: string
-  imagesUrl: string
+  imagesUrl: string[]
 }
 
 // TODO: 定義編輯商品參數型別
